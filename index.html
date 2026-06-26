@@ -1,109 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>AI Image Generator</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #202124;
-            color: white;
-            text-align: center;
-            margin-top: 80px;
-        }
+    <link rel="stylesheet" href="style.css">
 
-        textarea {
-            width: 500px;
-            height: 100px;
-            padding: 10px;
-            font-size: 16px;
-        }
-
-        button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        #status {
-            margin-top: 20px;
-        }
-
-        img {
-            margin-top: 20px;
-            max-width: 512px;
-            border-radius: 10px;
-        }
-    </style>
 </head>
 
 <body>
 
     <h1>AI Image Generator</h1>
 
-    <textarea
-        id="prompt"
-        placeholder="Describe your image..."
-    ></textarea>
+    <div class="container">
 
-    <br>
+        <!-- LEFT SIDE -->
+        <div class="left">
 
-    <button onclick="generateImage()">
-        Generate
-    </button>
+            <div class="section">
+                <div class="row">
+                    <label>Character</label>
+                    <select id="character"></select>
+                    <textarea id="characterTags"></textarea>
+                </div>
+            </div>
 
-    <p id="status"></p>
+            <div class="section">
+                <div class="row">
+                    <label>
+                        <input type="checkbox" id="defaultOutfit" checked>
+                        Default Outfit
+                    </label>
+                    <select id="outfit"></select>
+                    <textarea id="outfitTags"></textarea>
+                </div>
+            </div>
 
-    <img id="result" hidden>
+            <div class="section">
+                <div class="row">
+                    <label>Location</label>
+                    <select id="location"></select>
+                    <textarea id="locationTags"></textarea>
+                </div>
+            </div>
 
-    <script>
+            <div class="section">
+                <div class="row">
+                    <label>Time</label>
+                    <select id="time"></select>
+                    <textarea id="timeTags"></textarea>
+                </div>
+            </div>
 
-        async function generateImage() {
+            <div class="section">
+                <div class="row">
+                    <label>Angle</label>
+                    <select id="angle"></select>
+                    <textarea id="angleTags"></textarea>
+                </div>
+            </div>
 
-            const prompt = document.getElementById("prompt").value;
+            <div class="section">
+                <div class="row">
+                    <label>Aspect Ratio</label>
+                    <select id="aspectRatio"></select>
+                </div>
+            </div>
 
-            document.getElementById("status").innerText = "Generating...";
+            <div class="section">
+                <div class="row space-between">
+                    <h3>Prompt</h3>
+                    <button class="secondary" onclick="randomizePrompt()">
+                        🎲 Random
+                    </button>
+                </div>
+                <textarea id="prompt" placeholder="Describe what is happening..."></textarea>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right">
+
+            <div class="section">
+                <button class="secondary" onclick="previewPrompt()">Preview Prompt</button>
+                <button id="generateButton" class="primary" onclick="generateImage()">Generate</button>
+            </div>
             
-            const response = await fetch("https://unsightly-cement-army.ngrok-free.dev/generate", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    prompt: prompt,
-                    width: 512,
-                    height: 512,
-                    steps: 20,
-                    cfg_scale: 1.0
-                })
-            });
-            console.log(prompt)
-            const data = await response.json();
-            console.log(data);
-            
-            const resultResponse = await fetch("https://unsightly-cement-army.ngrok-free.dev/result",{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    request_id: data.request_id
-                })
-            });
+        </div>
 
-            const resultData = await resultResponse.json();
+    </div>
 
-            console.log(resultData);
-            document.getElementById("result").src = resultData.image_url;
-            document.getElementById("result").hidden = false;
+    <div id="promptModal" class="modal" hidden>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Prompt Preview</h2>
+                <button onclick="closePromptPreview()">✕</button>
+            </div>
+            <pre id="fullPromptPreview"></pre>
+        </div>
+    </div>
 
-            document.getElementById("status").innerText = "";
-        }  
-
-    </script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>

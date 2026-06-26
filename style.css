@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #202124;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.left, .right {
+    width: 50%;
+    max-width: 600px;
+}
+
+.section {
+    background: #2a2b2f;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+select {
+    width: 40%;
+    padding: 6px;
+}
+
+textarea {
+    width: 60%;
+    height: 40px;
+    padding: 6px;
+    font-size: 14px;
+}
+
+#prompt {
+    width: 100%;
+    height: 100px;
+}
+
+button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+button.primary {
+    background: #4f7cff;
+    color: white;
+    border: none;
+}
+
+button.secondary {
+    background: #333;
+    color: white;
+    border: none;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+#fullPromptPreview {
+    white-space: pre-wrap;
+    background: #111;
+    padding: 10px;
+    border-radius: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label {
+    width: 120px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.modal {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+
+    width: 700px;
+    max-width: 90%;
+
+    background: #2a2b2f;
+
+    border-radius: 10px;
+
+    padding: 20px;
+}
+
+.modal-header {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+#fullPromptPreview {
+
+    background: #111;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    white-space: pre-wrap;
+
+    max-height: 400px;
+
+    overflow-y: auto;
+}
+
+.modal[hidden] {
+    display: none !important;
+}
