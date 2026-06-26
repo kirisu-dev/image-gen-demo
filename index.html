@@ -61,16 +61,47 @@
 
     <script>
 
-        function generateImage() {
+        async function generateImage() {
 
             const prompt = document.getElementById("prompt").value;
 
-            document.getElementById("status").innerText =
-                "You entered:\n" + prompt;
+            document.getElementById("status").innerText = "Generating...";
+            
+            const response = await fetch("https://unsightly-cement-army.ngrok-free.dev/generate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    prompt: prompt,
+                    width: 512,
+                    height: 512,
+                    steps: 20,
+                    cfg_scale: 1.0
+                })
+            });
+            console.log(prompt)
+            const data = await response.json();
+            console.log(data);
+            
+            const resultResponse = await fetch("https://unsightly-cement-army.ngrok-free.dev/result",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    request_id: data.request_id
+                })
+            });
 
-            console.log(prompt);
+            const resultData = await resultResponse.json();
 
-        }
+            console.log(resultData);
+            document.getElementById("result").src = resultData.image_url;
+            document.getElementById("result").hidden = false;
+
+            document.getElementById("status").innerText = "";
+        }  
 
     </script>
 
