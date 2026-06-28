@@ -67,6 +67,14 @@
 
             <div class="section">
                 <div class="row">
+                    <label>Body framing</label>
+                    <select id="frame"></select>
+                    <textarea id="frameTags"></textarea>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="row">
                     <label>Aspect Ratio</label>
                     <select id="aspectRatio"></select>
                 </div>
@@ -89,6 +97,10 @@
             <div class="section">
                 <button class="secondary" onclick="previewPrompt()">Preview Prompt</button>
                 <button id="generateButton" class="primary" onclick="generateImage()">Generate</button>
+            </div>
+
+            <div class="section">
+                <img id="result" hidden>
             </div>
             
         </div>
