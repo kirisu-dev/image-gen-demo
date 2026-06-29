@@ -825,7 +825,7 @@ function randomizePrompt() {
 
 function buildPrompt() {
 
-    const character = document.getElementById("character").value;
+    const character = document.getElementById("characterTags").value;
     const outfit = document.getElementById("outfitTags").value;
     const location = document.getElementById("locationTags").value;
     const time = document.getElementById("timeTags").value;
@@ -834,13 +834,7 @@ function buildPrompt() {
     const userPrompt = document.getElementById("prompt").value;
  
     return `
-score_7, score_8, masterpiece,
-${characters[character]},
-${outfit},
-${location},
-${time},
-${angle},
-${frame},
+score_7, score_8, masterpiece, ${character}, ${outfit}, ${location}, ${time}, ${angle}, ${frame}
 ${userPrompt}
 `.trim();
 
